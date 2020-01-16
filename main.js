@@ -11,7 +11,7 @@ const rl = readline.createInterface({
 });
 
 // creates and empty "board" for the user to see where marks can be placed.
-// using let because the variable is expected to change with more 'X's and 'O's to add
+// using let because the variable is eXpected to change with more 'X's and 'O's to add
 let board = [
   [' ', ' ', ' '],
   [' ', ' ', ' '],
@@ -19,7 +19,7 @@ let board = [
 ];
 
 // assigns the first mark as 'X'
-// using let because the variable is expected to change from 'X' to 'O' and back
+// using let because the variable is eXpected to change from 'X' to 'O' and back
 let playerTurn = 'X';
 
 // is a function that print the current status of the board using the variable - board
@@ -34,23 +34,71 @@ const printBoard = () => {
 
 const horizontalWin = () => {
   // Your code here to check for horizontal wins
+  var firstCell = board[0][0];
+  var secondCell = board[0][1]
+  var thirdCell = board[0][2];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+  firstCell = board[1][0];
+  secondCell = board[1][1]
+  thirdCell = board[1][2];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+  firstCell = board[2][0];
+  secondCell = board[2][1]
+  thirdCell = board[2][2];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+  return false;
+ 
 }
 
 const verticalWin = () => {
   // Your code here to check for vertical wins
+  var firstCell = board[0][0];
+  var secondCell = board[1][0]
+  var thirdCell = board[2][0];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+   firstCell = board[1][0];
+   secondCell = board[1][1]
+   thirdCell = board[1][2];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+   firstCell = board[1][0];
+   secondCell = board[1][1]
+   thirdCell = board[1][2];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+  return false; 
 }
 
 const diagonalWin = () => {
   // Your code here to check for diagonal wins
+  var firstCell = board[0][0];
+  var secondCell = board[1][1]
+  var thirdCell = board[2][2];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+  firstCell = board[0][2];
+  secondCell = board[1][1]
+  thirdCell = board[2][0];
+  if (firstCell===secondCell && secondCell===thirdCell) return true;
+  return false;
+ 
 }
 
 const checkForWin = () => {
   // Your code here call each of the check for types of wins
+    if (horizontalWin) return true;
+       
+    if(verticalWin) return true;
+
+    if(diagonalWin) return true;
 }
 
+var turns = 0;
 const ticTacToe = (row, column) => {
   // Your code here to place a marker on the board
   // then check for a win
+  if (turns%2 === 0){
+  board[row][column]="X";
+  } else board[row][column]="O";
+  turns++;
+  checkForWin();
 }
 
 const getPrompt = () => {
